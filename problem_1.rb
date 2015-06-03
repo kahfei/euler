@@ -62,5 +62,5 @@ def add_digits(number)
 end
 
 test_cases.each do |num|
-  puts (sum_of_five(num) + sum_of_three(num)) - sum_of_fifthteen(num)
+  puts ((sum_of_five(num) + sum_of_three(num)) - sum_of_fifthteen(num)).to_i
 end
