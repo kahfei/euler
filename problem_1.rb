@@ -16,39 +16,27 @@ def divisible_by_5(number)
 end
 
 def sum_of_three(n)
-  list_of_three = []
-  for num in (3...n)
-    if divisible_by_3(num)
-      list_of_three << num
-    end
-  end
+  list_of_three = (3...n).collect {|num| num if divisible_by_3(num)}.compact
+  @list_of_three = list_of_three
   ((list_of_three[0] + list_of_three[-1]) / 2.0 ) * list_of_three.length
+  
+
 end
 
 def sum_of_five(n)
-  list_of_five = []
-  for num in (5...n)
-    if divisible_by_5(num)
-      list_of_five << num
-    end
-  end
+  list_of_five = (5...n).collect {|num| num if divisible_by_5(num) && !divisible_by_3(num)}.compact 
+  @list_of_five = list_of_five
   ((list_of_five[0] + list_of_five[-1]) / 2.0) * list_of_five.length
 end
 
 def sum_of_fifthteen(n)
   if n >= 15
-    list_of_fifthteen = []
-    for num in (15...n)
-      if (num % 15 == 0)
-        list_of_fifthteen << num
-      end
-    end
+    list_of_fifthteen = (15...n).collect {|num| num if (num % 15 == 0)}.compact
     ((list_of_fifthteen[0] + list_of_fifthteen[-1]) / 2.0) * list_of_fifthteen.length
   else
     0
   end
 end
-
 
 def add_digits(number)
   @total = 0
@@ -62,5 +50,7 @@ def add_digits(number)
 end
 
 test_cases.each do |num|
-  puts ((sum_of_five(num) + sum_of_three(num)) - sum_of_fifthteen(num)).to_i
+  puts (sum_of_five(num) + sum_of_three(num)).to_i
 end
+p @list_of_five.inject() {|s,v| s+ v}
+p @list_of_three
